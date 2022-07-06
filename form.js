@@ -18,17 +18,16 @@ function setItem() {
 }
 // dd
 function renderTable() {
-    let main = `<table >`;
+    let main = `<table class="table table-striped table-hover" >`;
 
-    main = main + `<tr><th>Name</th><th>Email</th><th>Mobile No.</th><th>Edit</th><th>Delete</th></tr> `;
+    main = main + `<tr><th scope="col">Sr No.</th><th scope="col">Task</th><th scope="col">Edit</th><th scope="col">Delete</th></tr> `;
 
     for (let k = 0; k < clients.length; k++) {
-        main = main + `<tr>
-        <td>${clients[k].name}</td>
-        <td>${clients[k].email}</td>
-        <td>${clients[k].mobile}</td>
-        <td><button class="button" onclick="editForm(${k})">edit</button></td>
-        <td><button class="button" onclick="deleteClient(${k})">delete</button></td>
+        main = main + `<tr class-"bg-light">
+        <td class="col-2">${[k+1]}</td>
+        <td class="col-4">${clients[k].task}</td>
+        <td class="col-3"><button class="btn btn-warning" onclick="editForm(${k})">edit</button></td>
+        <td class="col-3"><button class="btn btn-danger" onclick="deleteClient(${k})">delete</button></td>
         </tr> `;
     }
 
@@ -37,22 +36,19 @@ function renderTable() {
 }
 
 function clientDetails() {
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
-    let mobile = document.getElementById('mobile').value;
+    let task = document.getElementById('task').value;
+    
 
     let client = {
-        'name': name,
-        'email': email,
-        'mobile': mobile
+        'task': task,
+      
     };
     clients.push(client)
 
     setItem()
 
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('mobile').value = '';
+    document.getElementById('task').value = '';
+  
 
     renderTable();
 }
@@ -66,13 +62,11 @@ function deleteClient(index) {
 }
 // 
 function editMember(index) {
-    let newName = document.getElementById('editName').value;
-    let newEmail = document.getElementById('editEmail').value;
-    let newMobile = document.getElementById('editMobile').value;
+    let newTask = document.getElementById('editTask').value;
+
     clients[index] = {
-        name: newName,
-        email: newEmail,
-        mobile: newMobile
+        task: newTask,
+       
     }
     setItem()
 
@@ -86,18 +80,11 @@ function editForm(index) {
     <div class="form-input">
 
     <h2 class='h-2'>Update Details</h2>
-
-    <label for="name">Name * </label> <br>
-    <input class='input-1' type='text' id='editName' value='${clients[index].name}' placeholder="Your name" /> <br> <br>
-
-    <label for="name">Email * </label> <br>
-    <input class='input-1' type='text' id='editEmail' value='${clients[index].email}' placeholder="Your email"/> <br> <br>
-
-    <label for="name">Mobile No * </label> <br>
-    <input class='input-1' type='number' id='editMobile' value='${clients[index].mobile}' placeholder="Your mobile number"/> <br> <br>
-    
-    <button class='button' onclick='editMember(${index})'>Update</button> 
-
+       <div class="input-group">
+       <input class='form-control' type='text' id='editTask' value='${clients[index].task}' placeholder="Your name" /> <br> <br>
+       <button class='btn btn-warning' onclick='editMember(${index})'>Update</button> 
+   
+       </div>
     </div>
     `
     
@@ -109,41 +96,23 @@ function detailForm(){
    
     <h2 class="h-2">Your details</h2>
    <div class="form-input">
-    <div class="form-input-1">
-        <label for="name">Name * </label> <br>
-       <input class="input-1"  type="text" name="name" id="name" placeholder="Your name">
-    </div>
-    <div class="form-input-1">
-        <label for="name">Email * </label> <br>
-       <input class="input-1"  type="text" name="email" id="email" placeholder="Your email">
-    </div>
-    <div class="form-input-1">
-        <label for="age">Mobile No * </label> <br>
-        <input class="input-1"  type="number" name="mobile" id="mobile" placeholder="You mobile number">
-    </div>
-    <div class="form-input-1">
-       <button class="button" onclick="clientDetails()">ADD</button>
-    </div>
+    <div class="input-group">
+       <input class="form-control"  type="text" name="task" id="task" placeholder="Your Task">
+       <button class="btn btn-info" onclick="clientDetails()">ADD</button>
+       </div>
    </div>
     `
     document.getElementById('edit').innerHTML = str;
 }
-function addForm(){
+function addForm(index){
     let str = `
     <div class="form-input">
 
     <h2 class='h-2'>Update Details</h2>
-
-    <label for="name">Name * </label> <br>
-    <input class='input-1' type='text' id='editName' placeholder="Your name" /> <br> <br>
-
-    <label for="name">Email * </label> <br>
-    <input class='input-1' type='text' id='editEmail' placeholder="Your email"/> <br> <br>
-
-    <label for="name">Mobile No * </label> <br>
-    <input class='input-1' type='number' id='editMobile' placeholder="Your mobile number"/> <br> <br>
-    
-    <button class='button' onclick='(${index})'>Add</button> 
+    <div class="input-group">
+    <input class='input-1' type='text' id='editTask' placeholder="Updat Task" /> <br> <br>
+    <button class='btn' onclick='(${index})'>Add</button> 
+   </div>
 
     </div>
     `
